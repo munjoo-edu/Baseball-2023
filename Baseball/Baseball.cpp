@@ -40,20 +40,26 @@ public:
 		}
 	}
 
+	int getCountMatchedChar(const string& guessNumber)
+	{
+		int match_cnt = 0;
+		for(int i = 0; i < 3; i++)
+		{
+			if (guessNumber[i] == question[i])
+				match_cnt++;
+		}
+		return match_cnt;
+	}
+
 	GuessResult guess(const string& guessNumber)
 	{
 		CheckParameter(guessNumber);
 		if(guessNumber == question)
 			return { true, 3, 0 };
 
-		if((guessNumber[0] == question[0]
-			&& guessNumber[1] == question[1])
-			|| (guessNumber[1] == question[1]
-				&& guessNumber[2] == question[2])
-			|| (guessNumber[0] == question[0]
-				&& guessNumber[2] == question[2]))
-			return { false, 2, 0 };
-		return { false, 0, 0 };
+		return { false,
+			getCountMatchedChar(guessNumber),
+			0};
 	}
 
 private:
