@@ -2,9 +2,21 @@
 
 using namespace std;
 
+struct GuessResult
+{
+	bool solved;
+	int strikes;
+	int balls;
+};
+
 class Baseball
 {
 public:
+	explicit Baseball(const string& q)
+		: question(q)
+	{
+		
+	}
 	bool isDupNumber(const string& guessNumber)
 	{
 		return guessNumber[0] == guessNumber[1]
@@ -28,8 +40,12 @@ public:
 		}
 	}
 
-	void guess(const string& guessNumber)
+	GuessResult guess(const string& guessNumber)
 	{
 		CheckParameter(guessNumber);
+		return { true, 3, 0 };
 	}
+
+private:
+	string question;
 };
