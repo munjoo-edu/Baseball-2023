@@ -59,7 +59,7 @@ public:
 
 		return { false,
 			getCountMatchedChar(guessNumber),
-			0};
+			getCountMatchedChar(guessNumber) == 1 ? 2 : 0 };
 	}
 
 private:

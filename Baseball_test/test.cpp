@@ -37,3 +37,11 @@ TEST_F(TestBaseballFixture, Return2S0B) {
 	EXPECT_EQ(2, result.strikes);
 	EXPECT_EQ(0, result.balls);
 }
+
+TEST_F(TestBaseballFixture, Return1S2B) {
+	GuessResult result = game.guess("321");
+
+	EXPECT_FALSE(result.solved);
+	EXPECT_EQ(1, result.strikes);
+	EXPECT_EQ(2, result.balls);
+}
