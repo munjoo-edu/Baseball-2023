@@ -40,26 +40,39 @@ public:
 		}
 	}
 
-	int getCountMatchedChar(const string& guessNumber)
+	int getCountStrike(string& guessNumber)
 	{
 		int match_cnt = 0;
 		for(int i = 0; i < 3; i++)
 		{
 			if (guessNumber[i] == question[i])
+			{
 				match_cnt++;
+				guessNumber[i] = 'S';
+			}
 		}
 		return match_cnt;
 	}
-
+	int getCountBall(string& guessNumber)
+	{
+		int match_cnt = 0;
+		for(auto guessChar:guessNumber)
+			for (auto questionChar : question)
+				if (guessChar == questionChar) match_cnt++;
+		return match_cnt;
+	}
 	GuessResult guess(const string& guessNumber)
 	{
 		CheckParameter(guessNumber);
 		if(guessNumber == question)
 			return { true, 3, 0 };
 
+		string copied_guessNumber = guessNumber;
+		int count_strikes = getCountStrike(copied_guessNumber);
+		int count_balls = getCountBall(copied_guessNumber);
 		return { false,
-			getCountMatchedChar(guessNumber),
-			getCountMatchedChar(guessNumber) == 1 ? 2 : 0 };
+			count_strikes,
+			count_balls };
 	}
 
 private:
